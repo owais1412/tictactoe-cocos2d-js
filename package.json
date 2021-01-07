@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "underscore": "^1.12.0"
+  },
+  "name": "tictactoe",
+  "version": "1.0.0",
+  "main": "main.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/owais1412/tictactoe-cocos2d-js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/owais1412/tictactoe-cocos2d-js/issues"
+  },
+  "homepage": "https://github.com/owais1412/tictactoe-cocos2d-js#readme",
+  "description": ""
+}

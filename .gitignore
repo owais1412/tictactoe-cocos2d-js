@@ -2,3 +2,4 @@ frameworks/
 .gradle/
 .vscode/
 simulator/
+node_modules/
