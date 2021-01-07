@@ -23,13 +23,12 @@
  ****************************************************************************/
 
 var res = {
-    board : "res/board.png",
-    X : "res/X.png",
-    O : "res/O.png",
-    startButton_png: "res/startButton.png"
+  board : "res/board.png",
+  X : "res/X.png",
+  O : "res/O.png"
 };
 
 var g_resources = [];
 for (var i in res) {
-    g_resources.push(res[i]);
+  g_resources.push(res[i]);
 }
