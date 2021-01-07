@@ -34,27 +34,34 @@ var TTTLayer = cc.LayerColor.extend({
 	cellLocation:[[{x:113,y:113},{x:238,y:113},{x:360,y:113}],
 				  [{x:113,y:240},{x:238,y:240},{x:360,y:240}],
 				  [{x:113,y:360},{x:238,y:360},{x:360,y:360}]],
-	endGameWithText: function(text){
-		var label = new cc.LabelTTF(text, "Arial", 38);
-		label.setPosition( this.size.width / 2, this.size.height / 2);
-		label.setColor(cc.color(255,0,0));
-		this.addChild(label, 5);
+	showResult: function(resultText) {
+		for(var i = 0 ; i < 3 ; i++){
+			for(var j = 0 ; j < 3 ; j++){
+				this.boardData[i][j] = -1;
+			}
+		}
+		// this.removeAllChildren();
+		this.gameOver = false;
+		cc.director.runScene(new ResultScene(resultText));
 	},
 	showWinner: function(){
 		var winner = this.verifyWinner();
 		if(winner === -1 && this.verifyTie()){
-			this.endGameWithText('Tie');
+			// this.endGameWithText('Tie');
 			this.gameOver = true;
+			this.showResult('Match Tied');
 			return;
 		}
 		switch(winner){
 			case 0:
-				this.endGameWithText('O won the match');
+				// this.endGameWithText('O won the match');
 				this.gameOver = true;
+				this.showResult('O won the match');
 				break;
 			case 1:
-				this.endGameWithText('X won the match');
+				// this.endGameWithText('X won the match');
 				this.gameOver = true;
+				this.showResult('X won the match');
 				break;
 		}
 	},
@@ -168,6 +175,7 @@ var TTTLayer = cc.LayerColor.extend({
 	},
 	ctor:function () {
 		this._super();
+		this.gameOver = false;
 		this.init( cc.color(14, 27, 43,255) );
 		this.size = cc.winSize;
 		this.board = new cc.Sprite(res.board);

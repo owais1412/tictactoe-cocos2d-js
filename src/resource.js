@@ -26,6 +26,7 @@ var res = {
     board : "res/board.png",
     X : "res/X.png",
     O : "res/O.png",
+    startButton_png: "res/startButton.png"
 };
 
 var g_resources = [];
