@@ -5,9 +5,9 @@ var MenuLayer = cc.LayerColor.extend({
     'use strict';
 
     var size = cc.winSize,
-        centerPoint = cc.p(size.width / 2, size.height / 2),
-        menuItem1 = new cc.MenuItemFont('Play', this.startGame),
-        menu = new cc.Menu(menuItem1);
+      centerPoint = cc.p(size.width / 2, size.height / 2),
+      menuItem1 = new cc.MenuItemFont('Play', this.startGame),
+      menu = new cc.Menu(menuItem1);
 
     this._super();
     this.init(cc.color(14, 27, 43, 255));
