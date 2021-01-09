@@ -1,0 +1,83 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+
+  #lane :increment_build_number do
+  #  # Increment Build Number
+  #  path = '../frameworks/runtime-src/proj.android/app/build.gradle'
+  #  re = /versionCode\s+(\d+)/
+  #  s = File.read(path)
+  #  versionCode = s[re, 1].to_i
+  #  s[re, 1] = (versionCode + 1).to_s
+  #  f = File.new(path, 'w')
+  #  f.write(s)
+  #  f.close
+  #end
+
+  desc "Runs all the tests"
+  lane :test do
+
+    project_dir = 'frameworks/runtime-src/proj.android'
+    apk_path = project_dir + '/app/build/outputs/apk/debug/tictactoe-debug.apk'
+    
+    # Increment Build Number
+    build_gradle_path = '../' + project_dir + '/app/build.gradle'
+    re = /versionCode\s+(\d+)/
+    s = File.read(build_gradle_path)
+    new_version_code = (s[re, 1].to_i) + 1
+    s[re, 1] = (new_version_code).to_s
+    f = File.new(build_gradle_path, 'w')
+    f.write(s)
+    f.close
+
+    # git add, commit and push
+    git_add
+    git_commit(path: ".")
+    add_git_tag(
+      prefix: "v",
+      build_number: new_version_code
+    )
+    push_to_git_remote
+
+    # build a testing apk with gradle
+    gradle(
+      task: "assembleDebug",
+      project_dir: project_dir
+    )
+
+    # upload to diawi
+    diawi(
+      token: "6i0kaVjbwtYomEtbZ8WUgV8Whc8jupTomzqV2mb4Kp"
+    )
+  end
+
+  desc "Submit a new Beta Build to Crashlytics Beta"
+  lane :beta do
+    gradle(task: "clean assembleRelease")
+    crashlytics
+  
+    # sh "your_script.sh"
+    # You can also use other beta testing services here
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :deploy do
+    gradle(task: "clean assembleRelease")
+    # upload_to_play_store
+  end
+end

@@ -3,5 +3,4 @@ frameworks/
 .vscode/
 simulator/
 node_modules/
-fastlane/
-Gemfile
+
