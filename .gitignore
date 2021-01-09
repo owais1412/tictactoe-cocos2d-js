@@ -4,3 +4,4 @@ frameworks/
 simulator/
 node_modules/
 fastlane/
+Gemfile
