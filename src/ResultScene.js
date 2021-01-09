@@ -33,7 +33,7 @@ var ResultLayer = cc.LayerColor.extend({
     var label = new cc.LabelTTF(text, 'Arial', 38);
 
     label.setPosition(pos);
-    label.setColor(cc.color(255, 0, 0));
+    label.setColor(cc.color(255, 2, 0));
 
     this.addChild(label, 5);
   }
